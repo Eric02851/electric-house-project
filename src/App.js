@@ -11,35 +11,60 @@ function Button() {
 }
 */
 
-class Button extends React.Component {
-    /*
-    Props:
-        color: string color
-        LED: 0 or 1
-        
-    */
+function ColorButton(props) {
+    let style
+    if (!props.on) style = {color: props.color, backgroundColor: 'black'}
+    else style = {color: 'black', backgroundColor: props.color}
 
+    const onClick = () => {
+        if (!props.on) props.onClick(props.color)
+        else props.onUnclick(props.color)
+    }
+
+    return <button type='button' style={style} onClick={onClick}>{props.color}</button>
+}
+
+class ColorButtonList extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
+        this.pressed = null
         this.state = {
-            on: false,
-            style: {color: this.props.color, backgroundColor: 'black'}
+            red: false,
+            orange: false,
+            green: false,
+            blue: false,
+            purple: false,
+            cyan: false
         }
     }
 
-    onClick = () => {
-        if (!this.state.on) this.setState({on: true})
-        else this.setState({on: false})
+    onClick = (color) => {
+        let stateJson = JSON.parse(`{"${color}": true}`)
+        if (this.pressed) stateJson[this.pressed] = false
+        this.pressed = color
+        this.setState(stateJson)
+    }
+
+    onUnclick = (color) => {
+        const stateJson = JSON.parse(`{"${color}": false}`)
+        this.pressed = null
+        this.setState(stateJson)
     }
 
     render() {
-        if (!this.state.on) 
-            return (<button type='button' style = {{color: this.props.color, backgroundColor: 'black'}} onClick={this.onClick}>{this.props.color}</button>)
-        else 
-            return (<button type='button' style = {{color: 'black', backgroundColor: this.props.color}} onClick={this.onClick}>{this.props.color}</button>)
+        return (
+            <div>
+                <ColorButton on={this.state['red']} color='red' onClick={this.onClick} onUnclick={this.onUnclick} />
+                <ColorButton on={this.state['orange']} color='orange' onClick={this.onClick} onUnclick={this.onUnclick} />
+                <ColorButton on={this.state['yellow']} color='yellow' onClick={this.onClick} onUnclick={this.onUnclick} />
+                <ColorButton on={this.state['green']} color='green' onClick={this.onClick} onUnclick={this.onUnclick} />
+                <ColorButton on={this.state['blue']} color='blue' onClick={this.onClick} onUnclick={this.onUnclick} />
+                <ColorButton on={this.state['cyan']} color='cyan' onClick={this.onClick} onUnclick={this.onUnclick} />
+                <ColorButton on={this.state['purple']} color='purple' onClick={this.onClick} onUnclick={this.onUnclick} />
+            </div>
+        )
     }
 }
-
 class RgbRelay extends React.Component {
     constructor(props) {
         super(props);
@@ -47,8 +72,8 @@ class RgbRelay extends React.Component {
     }
 
     onOff = () => {
-        if (!this.state.on) this.setState({on: true})
-        else this.setState({on: false})
+        if (!this.state.on) this.setState({ on: true })
+        else this.setState({ on: false })
     }
 
     render() {
@@ -65,8 +90,7 @@ class RgbRelay extends React.Component {
             <div>
                 <button type="button" onClick={this.onOff}>Click Me!</button>
                 <h1>LED 1:</h1>
-                    <Button led={0} color="red" />
-                    <Button led={0} color="orange" />
+                <ColorButtonList />
                 <h1>On</h1>
             </div>
         )
