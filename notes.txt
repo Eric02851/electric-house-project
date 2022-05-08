@@ -1,9 +1,0 @@
-off
-
-red
-green
-blue
-
-yellow
-purple
-cyan
