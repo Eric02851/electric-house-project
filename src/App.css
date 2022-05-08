@@ -2,6 +2,7 @@ button {
     border: 0;
     margin: 3px;
     font-size: 30px;
+    font-family: Menlo, Consolas, monospace;
 }
 
 body {
@@ -9,5 +10,4 @@ body {
     color: rgb(232, 232, 232);
     font-family: Menlo, Consolas, monospace;
     font-size: large;
-    overflow: auto;
 }
