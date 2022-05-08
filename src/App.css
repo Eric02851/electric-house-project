@@ -1,0 +1,13 @@
+button {
+    border: 0;
+    margin: 3px;
+    font-size: 30px;
+}
+
+body {
+    background-color: rgba(0, 0, 0, 0.85);
+    color: rgb(232, 232, 232);
+    font-family: Menlo, Consolas, monospace;
+    font-size: large;
+    overflow: auto;
+}
