@@ -114,14 +114,14 @@ class Relay1 extends React.Component {
     }
 
     render() {
-        if (!this.state.pressed) 
+        if (!this.state.pressed)
             return (
                 <div>
                     <button type="button" style={this.state.style} onClick={this.onClick}>Relay 1</button>
                     <Relay2 />
                 </div>
             )
-        
+
         return (
             <div>
                 <button type="button" style={this.state.style} onClick={this.onClick}>Relay 1</button>
