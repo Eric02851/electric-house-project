@@ -1,5 +1,6 @@
 import React from 'react'
 import './App.css'
+const host = 'http://10.0.0.20'
 
 function ColorButton(props) {
     let style
@@ -29,8 +30,7 @@ class ColorButtonList extends React.Component {
     }
 
     postPressed = () => {
-        console.log(JSON.stringify({LEDNumber: this.props.LEDNumber, pressed: this.pressed}))
-        fetch('http://localhost:80', {
+        fetch(host, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({LEDNumber: this.props.LEDNumber, pressed: this.pressed})
@@ -58,11 +58,12 @@ class ColorButtonList extends React.Component {
         return (
             <div>
                 <ColorButton pressed={this.state['red']} color='red' onClick={this.onClick} onUnclick={this.onUnclick} />
-                <ColorButton pressed={this.state['orange']} color='orange' onClick={this.onClick} onUnclick={this.onUnclick} />
                 <ColorButton pressed={this.state['yellow']} color='yellow' onClick={this.onClick} onUnclick={this.onUnclick} />
                 <ColorButton pressed={this.state['green']} color='green' onClick={this.onClick} onUnclick={this.onUnclick} />
+                <ColorButton pressed={this.state['cyan']} color='cyan' onClick={this.onClick} onUnclick={this.onUnclick} />
                 <ColorButton pressed={this.state['blue']} color='blue' onClick={this.onClick} onUnclick={this.onUnclick} />
-                <ColorButton pressed={this.state['purple']} color='purple' onClick={this.onClick} onUnclick={this.onUnclick} />
+                <ColorButton pressed={this.state['magenta']} color='magenta' onClick={this.onClick} onUnclick={this.onUnclick} />
+
             </div>
         )
     }
@@ -85,7 +86,7 @@ class Relay2 extends React.Component {
             this.setState({pressed: false, style: {color: 'red', backgroundColor: 'black'}})
         }
 
-        fetch('http://localhost:80', requestOptions)
+        fetch(host, requestOptions)
     }
 
     render() {
@@ -110,7 +111,7 @@ class Relay1 extends React.Component {
             this.setState({pressed: false, style: {color: 'red', backgroundColor: 'black'}})
         }
 
-        fetch('http://localhost:80', requestOptions)
+        fetch(host, requestOptions)
     }
 
     render() {
