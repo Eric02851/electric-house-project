@@ -1,6 +1,6 @@
 import React from 'react'
 import './App.css'
-const host = 'http://10.0.0.20'
+const host = window.location.href //localhost
 
 function ColorButton(props) {
     let style
