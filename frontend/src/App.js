@@ -1,6 +1,26 @@
 import React from 'react'
 import './App.css'
 const host = window.location.href //localhost
+let buttonStates = {
+    1: {
+        pressed: null,
+        red: false,
+        yellow: false,
+        green: false,
+        blue: false,
+        purple: false,
+        cyan: false
+    },
+    2: {
+        pressed: null,
+        red: false,
+        yellow: false,
+        green: false,
+        blue: false,
+        purple: false,
+        cyan: false
+    }
+}
 
 function ColorButton(props) {
     let style
@@ -18,15 +38,13 @@ function ColorButton(props) {
 class ColorButtonList extends React.Component {
     constructor(props) {
         super(props)
-        this.pressed = null
-        this.state = {
-            red: false,
-            orange: false,
-            green: false,
-            blue: false,
-            purple: false,
-            cyan: false
-        }
+        this.state = buttonStates[this.props.LEDNumber]
+        this.pressed = this.state.pressed
+    }
+
+    componentWillUnmount() {
+        buttonStates[this.props.LEDNumber] = this.state
+        buttonStates[this.props.LEDNumber].pressed = this.pressed
     }
 
     postPressed = () => {
